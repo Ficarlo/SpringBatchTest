@@ -1,8 +1,8 @@
 package com.apave.AGATETOBDEQT.Service;
 
 import com.apave.AGATETOBDEQT.Controller.JobCompletionNotificationListener;
-import com.apave.AGATETOBDEQT.Controller.PersonItemProcessor;
-import com.apave.AGATETOBDEQT.Controller.PersonRowMapper;
+import com.apave.AGATETOBDEQT.Controller.Processor.PersonItemProcessor;
+import com.apave.AGATETOBDEQT.Controller.Mapper.PersonRowMapper;
 import com.apave.AGATETOBDEQT.Model.Person;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -16,13 +16,9 @@ import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourc
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
-import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 
 import javax.sql.DataSource;
 
@@ -60,10 +56,14 @@ public class BatchConfiguration {
     public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Person>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO log (person_id) VALUES (:personId)")
+                .sql("INSERT INTO marquage (person_id) VALUES (:personId)")
                 .dataSource(dataSource)
                 .build();
     }
+
+
+
+
     // end::readerwriterprocessor[]
 
     // tag::jobstep[]
@@ -87,4 +87,20 @@ public class BatchConfiguration {
                 .build();
     }
     // end::jobstep[]
+
+    //@Bean
+    //public JdbcBatchItemWriter<Person> writer2(DataSource dataSource) {
+    //    return new JdbcBatchItemWriterBuilder<Person>()
+    //            .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
+    //            .sql("UPDATE people set first_name= :firstName, last_name = :lastName where person_id = :personId")
+    //            .dataSource(dataSource)
+    //            .build();
+    //}
+
+
+    //public CompositeItemWriter<T> compositeItemWriter(){
+    //    CompositeItemWriter writer = new CompositeItemWriter();
+    //    writer.setDelegates(Arrays.asList(writer(),writer2()));
+    //    return writer;
+    //}
 }

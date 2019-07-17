@@ -1,6 +1,6 @@
 package com.apave.AGATETOBDEQT.Controller;
 
-import com.apave.AGATETOBDEQT.Model.Log;
+import com.apave.AGATETOBDEQT.Model.Marquage;
 import com.apave.AGATETOBDEQT.Model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +31,25 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
         if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED! Time to verify the results");
 
-            jdbcTemplate.query("SELECT log_id, person_id from log ",
-                    (rs, row) -> new Log(
+            log.info("marquage result:");
+            jdbcTemplate.query("SELECT log_id, person_id from marquage ",
+                    (rs, row) -> new Marquage(
                             rs.getInt("log_id"),
                             rs.getInt("person_id")
                     )
 
             ).forEach(logPerson -> log.info("Found <" + logPerson + "> in the database."));
+
+
+            //log.info("Person result:");
+            //jdbcTemplate.query("SELECT person_id, first_name, last_name FROM people ",
+            //        (rs, row) -> new Person(
+            //                rs.getInt("person_id"),
+            //                rs.getString("first_name"),
+            //                rs.getString("last_name")
+            //        )
+//
+            //).forEach(logPerson -> log.info("Found <" + logPerson + "> in the database."));
         }
     }
 }

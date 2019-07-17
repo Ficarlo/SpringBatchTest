@@ -13,9 +13,9 @@ INSERT INTO people (person_id,first_name,last_name) values(2,'Solenn','PACK');
 INSERT INTO people (person_id,first_name,last_name) values(3,'John','DOE');
 
 
-DROP TABLE log IF EXISTS;
+DROP TABLE marquage IF EXISTS;
 
-CREATE TABLE log (
+CREATE TABLE marquage (
 log_id BIGINT IDENTITY NOT NULL PRIMARY KEY,
 person_id BIGINT NOT NULL
 );

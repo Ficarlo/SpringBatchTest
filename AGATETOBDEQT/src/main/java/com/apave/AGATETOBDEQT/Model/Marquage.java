@@ -1,11 +1,11 @@
 package com.apave.AGATETOBDEQT.Model;
 
-public class Log {
+public class Marquage {
 
     private int log_id;
     private int person_id;
 
-    public Log(int log_id, int person_id) {
+    public Marquage(int log_id, int person_id) {
         this.log_id = log_id;
         this.person_id = person_id;
     }

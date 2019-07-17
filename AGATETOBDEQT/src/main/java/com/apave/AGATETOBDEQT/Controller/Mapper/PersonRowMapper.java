@@ -1,4 +1,4 @@
-package com.apave.AGATETOBDEQT.Controller;
+package com.apave.AGATETOBDEQT.Controller.Mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
