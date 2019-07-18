@@ -1,4 +1,4 @@
-package com.apave.AGATETOBDEQT.Controller.wsSoap;
+package com.apave.AGATETOBDEQT.wsSoap;
 
 public interface WsConstantes {
 

@@ -1,26 +1,16 @@
-package com.apave.AGATETOBDEQT.Model;
+package com.AgateToBDEQT.AgateToBDEQT.Model;
 
 public class Person {
 
-    private int personId;
     private String lastName;
     private String firstName;
 
     public Person() {
     }
 
-    public Person(int personId, String firstName, String lastName) {
-        this.personId = personId;
+    public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
     }
 
     public void setFirstName(String firstName) {
@@ -41,7 +31,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "personId: " + personId +"firstName: " + firstName + ", lastName: " + lastName;
+        return "firstName: " + firstName + ", lastName: " + lastName;
     }
 
 }

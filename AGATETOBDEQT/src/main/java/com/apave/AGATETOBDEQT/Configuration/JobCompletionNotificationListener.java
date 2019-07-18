@@ -1,7 +1,6 @@
-package com.apave.AGATETOBDEQT.Controller;
+package com.apave.AGATETOBDEQT.Configuration;
 
 import com.apave.AGATETOBDEQT.Model.Marquage;
-import com.apave.AGATETOBDEQT.Model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -32,7 +31,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
             log.info("!!! JOB FINISHED! Time to verify the results");
 
             log.info("marquage result:");
-            jdbcTemplate.query("SELECT log_id, person_id from marquage ",
+            jdbcTemplate.query("SELECT log_id, person_id from PR1BD000.marquage ",
                     (rs, row) -> new Marquage(
                             rs.getInt("log_id"),
                             rs.getInt("person_id")

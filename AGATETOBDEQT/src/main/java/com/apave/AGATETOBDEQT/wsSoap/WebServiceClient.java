@@ -1,11 +1,11 @@
-package com.apave.AGATETOBDEQT.Controller.wsSoap;
+package com.apave.AGATETOBDEQT.wsSoap;
 
 import com.apave.AGATETOBDEQT.wsdl.Add;
 import com.apave.AGATETOBDEQT.wsdl.AddResponse;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import static com.apave.AGATETOBDEQT.Controller.wsSoap.WsConstantes.OPERATION_NS_ADD;
+import static com.apave.AGATETOBDEQT.wsSoap.WsConstantes.OPERATION_NS_ADD;
 
 
 public class WebServiceClient extends WebServiceGatewaySupport {
