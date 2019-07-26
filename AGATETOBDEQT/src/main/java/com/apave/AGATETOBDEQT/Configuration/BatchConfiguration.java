@@ -53,22 +53,9 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 
 
 
-    //@Bean(destroyMethod = "close")
-    //DataSource dataSource(Environment env) {
-    //    HikariConfig dataSourceConfig = new HikariConfig();
-//
-    //    dataSourceConfig.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
-    //    dataSourceConfig.setJdbcUrl(environment.getProperty("spring.datasource.url"));
-    //    dataSourceConfig.setUsername(environment.getProperty("spring.datasource.username"));
-    //    dataSourceConfig.setPassword(environment.getProperty("spring.datasource.password"));
-//
-    //    return new HikariDataSource(dataSourceConfig);
-    //}
-
-
-
-    @Override
+    //Vérifier le problème d'écriture dans les tables batch https://docs.spring.io/spring-batch/trunk/reference/html/metaDataSchema.html
     //https://stackoverflow.com/questions/25077549/spring-batch-without-persisting-metadata-to-database
+    @Override
     public void setDataSource(DataSource dataSource) {
         this.dataSource = null;
         this.transactionManager = new DataSourceTransactionManager(dataSource);
@@ -90,11 +77,17 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 
     @Bean
     public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
+
+        //CAS 1 : INSERT
         return new JdbcBatchItemWriterBuilder<Person>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
                 .sql("INSERT INTO PR1BD000.marquage (log_id, person_id) VALUES (:personId, :personId)")
                 .dataSource(dataSource)
                 .build();
+
+        //CAS 2 : MISE A JOUR
+
+        //CAS 4 : INSERT TABLE ERR
     }
 
 
@@ -109,6 +102,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .flow(step1)
+                //.next(step1)
                 .end()
                 .build();
     }
